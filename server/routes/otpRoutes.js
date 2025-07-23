@@ -43,11 +43,11 @@ router.post("/generate", verifyToken, async (req, res) => {
     `;
 
     // 4. Send OTP via Twilio
-    await client.messages.create({
+      await client.messages.create({
       body: `Your ward is applying for a homepass. The OTP to verify your approval is : ${otp}`,
       from: fromPhone,
       to: decryptedPhone,
-    });
+   });
 
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (err) {
