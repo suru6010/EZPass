@@ -1,0 +1,82 @@
+/* ApplyOutpass.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.outpass-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.outpass-card {
+  background: #1f1f1f;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.outpass-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #e0e0e0;
+}
+
+.highlight {
+  color: #bb86fc;
+}
+
+.outpass-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.outpass-form input {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.outpass-form input::placeholder {
+  color: #aaa;
+}
+
+.outpass-form input:focus {
+  background-color: #333333;
+  border: 1px solid #bb86fc;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.primary-btn {
+  background-color: #bb86fc;
+  color: #121212;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #a96fff;
+}

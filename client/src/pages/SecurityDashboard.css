@@ -1,0 +1,67 @@
+.security-dashboard {
+  background-color: #121212;
+  color: #f0f0f0;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.security-dashboard h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #bb86fc; /* Purple heading */
+  text-align: center;
+}
+
+.security-dashboard input[type="date"] {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #1e1e1e;
+  color: #fff;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.security-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #333;
+}
+
+.security-dashboard th,
+.security-dashboard td {
+  padding: 12px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.security-dashboard th {
+  background-color: #2c2c2c;
+  color: #bb86fc; /* Purple column headers */
+}
+
+.security-dashboard td {
+  background-color: #222;
+}
+
+.security-dashboard button {
+  background-color: #bb86fc; /* Purple button */
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.security-dashboard button:hover {
+  background-color: #9a67ea; /* Slightly darker purple on hover */
+}
