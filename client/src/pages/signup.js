@@ -9,31 +9,33 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
- const handleSignup = async (e) => {
-  e.preventDefault();
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const firebase_uid = userCredential.user.uid;
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      // Step 1: Create user in Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const firebase_uid = userCredential.user.uid;
 
-  
-    const response = await fetch("/api/students/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firebase_uid }),
-    });
+      // Step 2: Create a placeholder in your PostgreSQL via backend
+      const response = await fetch("http://localhost:3001/api/students/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firebase_uid }),
+      });
 
-    if (!response.ok) {
-      throw new Error("Failed to create user in database");
+      if (!response.ok) {
+        throw new Error("Failed to create user in database");
+      }
+
+      console.log("User signed up and placeholder created:", firebase_uid);
+      alert("Signup successful! Complete your registration.");
+
+      // Step 3: Redirect to registration page
+      navigate("/register");
+    } catch (error) {
+      alert("Signup failed: " + error.message);
     }
-
-    console.log("User signed up and placeholder created:", firebase_uid);
-    alert("Signup successful! Complete your registration.");
-
-    navigate("/register"); 
-  } catch (error) {
-    alert("Signup failed: " + error.message);
-  }
-};
+  };
 
 
   return (
