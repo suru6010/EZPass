@@ -8,7 +8,7 @@ const SecurityDashboard = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [passes, setPasses] = useState([]);
 
-  // 🔒 Role check
+  // Role check
   useEffect(() => {
     const checkRole = async () => {
       const token = localStorage.getItem("token");
@@ -35,7 +35,6 @@ const SecurityDashboard = () => {
     checkRole();
   }, [navigate]);
 
-  // 🧾 Fetch passes
   const fetchPasses = useCallback(async () => {
     if (!selectedDate) return;
     try {
@@ -58,7 +57,7 @@ const SecurityDashboard = () => {
     fetchPasses();
   }, [fetchPasses]);
 
-  // 🟩 Mark entry/exit
+  
   const handleMark = async (id, type) => {
     try {
       const res = await fetch(`http://localhost:3001/api/passlog/mark-${type}/${id}`, {

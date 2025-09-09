@@ -10,34 +10,48 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault(); // ✅ prevent form from refreshing
+    e.preventDefault();
 
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const token = await userCredential.user.getIdToken();
-    const uid = userCredential.user.uid;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      const uid = userCredential.user.uid;
 
-    const res = await fetch(`http://localhost:3001/api/students/role/${uid}`);
-    const data = await res.json();
+      // Check registration status
+      const statusRes = await fetch(`http://localhost:3001/api/students/status/${uid}`);
+      const statusData = await statusRes.json();
 
-    console.log("Fetched role:", data.role);
+      if (!statusRes.ok) {
+        alert("Failed to fetch registration status: " + statusData.error);
+        return;
+      }
 
-    if (res.ok) {
-      const role = data.role;
+      if (statusData.registration_status === "unregistered") {
+        localStorage.setItem("token", token);
+        navigate("/register");
+        return;
+      }
+
+      // Step 2: Fetch role only if registered
+      const roleRes = await fetch(`http://localhost:3001/api/students/role/${uid}`);
+      const roleData = await roleRes.json();
+
+      if (!roleRes.ok) {
+        alert("Failed to fetch role: " + roleData.error);
+        return;
+      }
+
+      const role = roleData.role;
       localStorage.setItem("token", token);
 
       if (role === "student") navigate("/student-dashboard");
-      if (role === "security") navigate("/security");
-    } 
-    else {
-      alert("Failed to fetch role: " + data.error);
+      else if (role === "security") navigate("/security");
+      else alert("Unknown role");
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed");
     }
-  } catch (error) {
-    console.error("Login error:", error);
-    alert("Login failed");
-  }
-};
-
+  };
 
   return (
     <div className="login-container">

@@ -14,12 +14,12 @@ const fromPhone = process.env.TWILIO_PHONE;
 
 const client = require("twilio")(accountSid, authToken);
 
-// ✅ Generate OTP and store encrypted in homepass_requests
+// Generate OTP and store encrypted in homepass_requests
 router.post("/generate", verifyToken, async (req, res) => {
   const firebase_uid = req.firebase_uid;
 
   try {
-    // 1. Fetch encrypted phone from students table
+    // Fetch encrypted phone from students table
     const result = await sql`
       SELECT parent_phone_number FROM students WHERE firebase_uid = ${firebase_uid}
     `;
@@ -31,12 +31,12 @@ router.post("/generate", verifyToken, async (req, res) => {
     const encryptedPhone = result[0].parent_phone_number;
     const decryptedPhone = decrypt(encryptedPhone);
 
-    // 2. Generate OTP
+    // Generate OTP
     const otp = crypto.randomInt(100000, 999999).toString();
     const expiration = dayjs().add(5, "minute").toISOString();
     const encryptedOtp = encrypt(otp);
 
-    // 3. Store in DB
+    // Store in DB
     await sql`
       INSERT INTO homepass_requests (firebase_uid, otp, expires_at)
       VALUES (${firebase_uid}, ${encryptedOtp}, ${expiration})
@@ -56,7 +56,7 @@ router.post("/generate", verifyToken, async (req, res) => {
   }
 });
 
-// ✅ Verify OTP from encrypted table
+// Verify OTP from encrypted table
 router.post("/verify", verifyToken, async (req, res) => {
   const { otp, date, purpose } = req.body;
   const firebase_uid = req.firebase_uid;
@@ -66,7 +66,7 @@ router.post("/verify", verifyToken, async (req, res) => {
   }
 
   try {
-    // 1. Get latest OTP for user
+    // Get latest OTP for user
     const result = await sql`
       SELECT otp, expires_at FROM homepass_requests
       WHERE firebase_uid = ${firebase_uid}

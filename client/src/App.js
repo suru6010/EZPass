@@ -9,17 +9,6 @@ import SecurityDashboard from "./pages/SecurityDashboard";
 import ApplyOutpass from "./pages/ApplyOutpass";
 import Home from "./pages/Home";
 
-// 🔐 Role-based route guard
-const RequireSecurity = ({ children }) => {
-  const firebase_uid = localStorage.getItem("firebase_uid");
-  const role = localStorage.getItem("role");
-
-  if (!firebase_uid || role !== "security") {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
 
 function App() {
   return (

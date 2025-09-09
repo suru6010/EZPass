@@ -29,7 +29,7 @@ router.post("/homepass", verifyToken, async (req, res) => {
   }
 });
 
-// ✅ GET /api/passlog/date/:date — for security dashboard
+// GET /api/passlog/date/:date — for security dashboard
 router.get("/date/:date", async (req, res) => {
   const { date } = req.params;
 
@@ -54,7 +54,7 @@ router.get("/date/:date", async (req, res) => {
   }
 });
 
-// ✅ PATCH /api/passlog/mark-exit/:id
+// PATCH /api/passlog/mark-exit/:id
 router.patch("/mark-exit/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -68,7 +68,7 @@ router.patch("/mark-exit/:id", async (req, res) => {
   }
 });
 
-// ✅ PATCH /api/passlog/mark-entry/:id
+// PATCH /api/passlog/mark-entry/:id
 router.patch("/mark-entry/:id", async (req, res) => {
   const { id } = req.params;
   try {

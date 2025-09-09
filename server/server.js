@@ -11,27 +11,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Firebase Admin SDK Initialization
+// Firebase Admin SDK Initialization
 const serviceAccount = require(path.join(__dirname, "firebase", "serviceAccountKey.json"));
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-// ✅ Routes
+// Routes
 const studentRoutes = require("./routes/studentRoutes");
 const passlogRoutes = require("./routes/passlogRoutes");
-const otpRoutes = require("./routes/otpRoutes"); // renamed for clarity
+const otpRoutes = require("./routes/otpRoutes"); 
 
 app.use("/api/students", studentRoutes);
 app.use("/api/passlog", passlogRoutes);
-app.use("/api/otp", otpRoutes); // ✅ match with frontend route
+app.use("/api/otp", otpRoutes); 
 
-// ✅ Health check route
+
 app.get("/", (req, res) => {
-  res.send("EZPass backend is running ✅");
+  res.send("EZPass backend is running ");
 });
 
-// ✅ DB test route
+// DB test route
 const sql = require("./db");
 app.get("/test-db", async (req, res) => {
   try {
@@ -42,9 +42,9 @@ app.get("/test-db", async (req, res) => {
   }
 });
 
-// ✅ Start server
+// Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
 

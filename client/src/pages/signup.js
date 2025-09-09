@@ -9,17 +9,32 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User signed up:", userCredential.user);
-      alert("Signup successful!");
-      navigate("/register"); // Redirect to student registration form
-    } catch (error) {
-      alert("Signup failed: " + error.message);
+ const handleSignup = async (e) => {
+  e.preventDefault();
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const firebase_uid = userCredential.user.uid;
+
+  
+    const response = await fetch("/api/students/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firebase_uid }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create user in database");
     }
-  };
+
+    console.log("User signed up and placeholder created:", firebase_uid);
+    alert("Signup successful! Complete your registration.");
+
+    navigate("/register"); 
+  } catch (error) {
+    alert("Signup failed: " + error.message);
+  }
+};
+
 
   return (
     <div className="signup-container">
