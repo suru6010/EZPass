@@ -12,11 +12,11 @@ const SignUp = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      // Step 1: Create user in Firebase
+    
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const firebase_uid = userCredential.user.uid;
 
-      // Step 2: Create a placeholder in your PostgreSQL via backend
+      //Create a placeholder in PostgreSQL via backend
       const response = await fetch("http://localhost:3001/api/students/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

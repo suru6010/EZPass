@@ -11,12 +11,6 @@ const SecurityDashboard = () => {
   // Role check
   useEffect(() => {
     const checkRole = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-
       const user = auth.currentUser;
       if (!user) {
         navigate("/login");

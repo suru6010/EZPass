@@ -11,23 +11,24 @@ const StudentRegister = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (!user) navigate("/login");
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
+  const user = auth.currentUser;
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+ }, [navigate]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = auth.currentUser;
 
-    if (!user) {
-      alert("You must be signed up to register.");
-      navigate("/signup");
-      return;
-    }
+  e.preventDefault();
 
+  const user = auth.currentUser; 
+  if (!user) {
+    alert("You must be signed in.");
+    navigate("/login");
+    return;
+  }
+  
     try {
       const idToken = await user.getIdToken();
 
@@ -39,7 +40,7 @@ const StudentRegister = () => {
       };
 
       const res = await fetch("http://localhost:3001/api/students/register", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${idToken}`,
