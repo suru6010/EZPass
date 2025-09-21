@@ -26,22 +26,6 @@ app.use("/api/students", studentRoutes);
 app.use("/api/passlog", passlogRoutes);
 app.use("/api/otp", otpRoutes); 
 
-
-app.get("/", (req, res) => {
-  res.send("EZPass backend is running ");
-});
-
-// DB test route
-const sql = require("./db");
-app.get("/test-db", async (req, res) => {
-  try {
-    const result = await sql`SELECT NOW()`;
-    res.json({ dbTime: result[0] });
-  } catch (error) {
-    res.status(500).json({ error: "Database connection failed", detail: error.message });
-  }
-});
-
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
