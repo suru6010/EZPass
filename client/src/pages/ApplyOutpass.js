@@ -22,7 +22,7 @@ const sendOtp = async () => {
   const token = await auth.currentUser.getIdToken();
 
   try {
-    const res = await fetch("http://localhost:3001/api/otp/generate", {
+    const res = await fetch("/api/otp/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const sendOtp = async () => {
     e.preventDefault();
     const token = await auth.currentUser.getIdToken();
     try {
-      const res = await fetch("http://localhost:3001/api/otp/verify", {
+      const res = await fetch("/api/otp/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

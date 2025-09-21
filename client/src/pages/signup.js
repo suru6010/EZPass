@@ -17,7 +17,7 @@ const SignUp = () => {
       const firebase_uid = userCredential.user.uid;
 
       //Create a placeholder in PostgreSQL via backend
-      const response = await fetch("http://localhost:3001/api/students/signup", {
+      const response = await fetch("/api/students/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firebase_uid }),

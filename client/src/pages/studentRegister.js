@@ -39,7 +39,7 @@ const StudentRegister = () => {
         parent_phone_number: parentPhone,
       };
 
-      const res = await fetch("http://localhost:3001/api/students/register", {
+      const res = await fetch("/api/students/register", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

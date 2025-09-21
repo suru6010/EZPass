@@ -32,7 +32,7 @@ const SecurityDashboard = () => {
   const fetchPasses = useCallback(async () => {
     if (!selectedDate) return;
     try {
-      const res = await fetch(`http://localhost:3001/api/passlog/date/${selectedDate}`);
+      const res = await fetch(`/api/passlog/date/${selectedDate}`);
       const data = await res.json();
 
       if (Array.isArray(data)) {
@@ -54,7 +54,7 @@ const SecurityDashboard = () => {
   
   const handleMark = async (id, type) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/passlog/mark-${type}/${id}`, {
+      const res = await fetch(`/api/passlog/mark-${type}/${id}`, {
         method: "PATCH",
       });
 

@@ -21,7 +21,7 @@ const ApplyHomepass = () => {
 
     try {
       const idToken = await user.getIdToken();
-      const res = await fetch("http://localhost:3001/api/passlog/homepass", {
+      const res = await fetch("/api/passlog/homepass", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const Login = () => {
       const uid = userCredential.user.uid;
 
       // Check registration status
-      const statusRes = await fetch(`http://localhost:3001/api/students/status/${uid}`);
+      const statusRes = await fetch(`/api/students/status/${uid}`);
       const statusData = await statusRes.json();
 
       if (!statusRes.ok) {
@@ -33,7 +33,7 @@ const Login = () => {
       }
 
       // Step 2: Fetch role only if registered
-      const roleRes = await fetch(`http://localhost:3001/api/students/role/${uid}`);
+      const roleRes = await fetch(`/api/students/role/${uid}`);
       const roleData = await roleRes.json();
 
       if (!roleRes.ok) {
