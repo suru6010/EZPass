@@ -39,8 +39,8 @@ const StudentRegister = () => {
         parent_phone_number: parentPhone,
       };
 
-      const res = await fetch("/api/students/register", {
-        method: "PATCH",
+      const res = await fetch(`/api/students/register`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${idToken}`,

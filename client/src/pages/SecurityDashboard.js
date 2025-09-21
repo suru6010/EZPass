@@ -17,7 +17,7 @@ const SecurityDashboard = () => {
         return;
       }
 
-      const res = await fetch(`http://localhost:3001/api/students/role/${user.uid}`);
+      const res = await fetch(`/api/students/role/${user.uid}`);
       const data = await res.json();
 
       if (data.role !== "security") {
